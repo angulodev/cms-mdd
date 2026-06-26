@@ -10,8 +10,13 @@ Motor de metadatos (MDD) multi-tenant para generar UI dinámica, inspirado en la
 
 ## Estado actual
 - ✅ Migración `001_core_mdd` aplicada — 12 tablas core creadas
-- ⚠️ **RLS deshabilitado** en las 12 tablas (pendiente: archivo 002)
-- ⏳ Pendiente: funciones de seguridad, políticas RLS, trigger de auto-creación de `sys_user`, seed inicial
+- ✅ Migración `002_security_rls` aplicada:
+  - Funciones `SECURITY DEFINER`: `fn_user_company_ids()`, `fn_is_platform_admin()`, `fn_user_has_role()`, `fn_check_acl()`
+  - RLS habilitado y con políticas en las 12 tablas core
+  - Trigger `on_auth_user_created` → auto-crea `sys_user` al hacer signup
+  - Seed: compañía **Angulodev**, roles de sistema `admin` / `app_admin` / `reader`
+- ⏳ Pendiente (003): registrar a Francisco en `auth.users` (signup) y luego marcarlo `is_platform_admin = true` + asignarlo a Angulodev con rol `admin`
+- ⏳ Pendiente: motor de UI dinámica que lea `sys_dictionary`
 
 ## Decisiones de arquitectura (no reabrir sin discutirlas)
 
