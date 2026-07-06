@@ -4,7 +4,7 @@ Motor de metadatos (MDD) multi-tenant para generar UI dinámica, inspirado en la
 
 ## Proyecto Supabase
 - **Nombre:** `cms-mdd`
-- **Project ref:** `tncbdookqvusxjnklrns`
+- **Project ref:** `mseiqleparjnchmgnwwa`
 - **Región:** `us-east-1`
 - **Org:** angulodev's Org (free tier)
 
