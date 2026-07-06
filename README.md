@@ -4,7 +4,7 @@ SaaS MDD multi-tenant, estilo ServiceNow. Motor de metadatos que alimenta una UI
 
 **Stack:** Supabase (Postgres + RLS) · React + TypeScript (UI dinámica, próximamente)
 
-**Proyecto Supabase:** `cms-mdd` (`tncbdookqvusxjnklrns`) — región `us-east-1`
+**Proyecto Supabase:** `cms-mdd` (`mseiqleparjnchmgnwwa`) — región `us-east-1`
 
 Ver documentación completa de arquitectura en [`docs/README_core_mdd.md`](docs/README_core_mdd.md).
 
