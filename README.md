@@ -124,6 +124,7 @@ Primer módulo de dominio sobre el core. **El aislamiento aquí es por membresí
 | `20260626235345_security_rls.sql` | Funciones + RLS + trigger + seed base | ✅ Aplicada |
 | `20260706_seed_platform_admin.sql` | Platform admin + membresía (sin IDs hardcodeados) | ✅ Aplicada |
 | `20260707_fam_lists.sql` | Módulo fam: tablas + RLS por membresía + Realtime + registro MDD | ✅ Aplicada |
+| `20260707_fam_user_visibility.sql` | Política: ver sys_user de co-miembros de listas fam | ✅ Aplicada |
 
 ### Recrear el proyecto desde cero
 
