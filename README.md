@@ -15,7 +15,9 @@ SaaS **MDD (Metadata-Driven Development)** multi-tenant, estilo ServiceNow. Un m
 - [x] **001** — Core MDD: 12 tablas `sys_*` + índices
 - [x] **002** — Seguridad: 4 funciones `SECURITY DEFINER`, RLS en las 12 tablas (29 políticas), trigger de signup, seed base
 - [x] **003** — Seed: Francisco como platform admin, membresía y rol admin en Angulodev
-- [ ] Módulo `fam_*` — listas compartidas familiares (compras/tareas/pendientes) con Google OAuth + Realtime
+- [x] **004** — Módulo `fam_*`: 3 tablas, 12 políticas RLS, 4 funciones, Realtime, registro completo en el MDD
+- [ ] Google OAuth — habilitar provider en el dashboard de Supabase (config manual, no migrable)
+- [ ] UI del módulo fam (PWA de listas familiares)
 - [ ] Motor de UI dinámica (lee `sys_dictionary` en runtime)
 - [ ] Generador de políticas RLS desde `sys_acl`
 
@@ -96,6 +98,24 @@ RLS habilitado en **las 12 tablas** con 29 políticas explícitas:
 
 ---
 
+## Módulo `fam_*` — Listas Familiares
+
+Primer módulo de dominio sobre el core. **El aislamiento aquí es por membresía de lista, no por tenant** (una familia no es una compañía).
+
+| Tabla | Propósito |
+|---|---|
+| `fam_list` | Lista compartida (compras/tareas/pendientes/otra). Genera `share_code` de 6 caracteres. |
+| `fam_list_member` | Membresía usuario↔lista con rol: `owner` / `editor` / `viewer`. |
+| `fam_item` | Ítem con `is_done`, `done_by`/`done_at` (quién completó qué), `quantity` libre y `position`. |
+
+**Flujo de uso:** crear lista (trigger te hace `owner` automático) → compartir el `share_code` → el otro usuario llama `fn_fam_join_by_code(código)` y entra como `editor` → Realtime sincroniza los cambios en vivo (las 3 tablas están en la publicación `supabase_realtime`, con `replica identity full` en list e item).
+
+**Funciones:** `fn_fam_is_member`, `fn_fam_has_role` (base de las 12 políticas RLS), `fn_fam_join_by_code` (SECURITY DEFINER — único camino de auto-join), `fn_touch_updated_at` (genérico, reutilizable).
+
+**MDD:** el módulo quedó completamente registrado en el motor — aplicación "Listas Familiares" (`scope_prefix: fam`), 3 módulos de navegación, 3 `sys_db_object`, 14 campos en `sys_dictionary` y 7 choices. Será el primer caso de prueba de la UI dinámica.
+
+---
+
 ## Migraciones
 
 | Archivo | Contenido | Estado |
@@ -103,6 +123,7 @@ RLS habilitado en **las 12 tablas** con 29 políticas explícitas:
 | `20260626231240_core_mdd.sql` | 12 tablas + índices | ✅ Aplicada |
 | `20260626235345_security_rls.sql` | Funciones + RLS + trigger + seed base | ✅ Aplicada |
 | `20260706_seed_platform_admin.sql` | Platform admin + membresía (sin IDs hardcodeados) | ✅ Aplicada |
+| `20260707_fam_lists.sql` | Módulo fam: tablas + RLS por membresía + Realtime + registro MDD | ✅ Aplicada |
 
 ### Recrear el proyecto desde cero
 
