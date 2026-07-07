@@ -127,6 +127,7 @@ Primer módulo de dominio sobre el core. **El aislamiento aquí es por membresí
 | `20260707_fam_user_visibility.sql` | Política: ver sys_user de co-miembros de listas fam | ✅ Aplicada |
 | `20260707_fam_item_price_photo_link.sql` | fam_item: precio/foto/link + bucket fam-photos con políticas | ✅ Aplicada |
 | `20260707_fam_member_approval.sql` | Aprobación de miembros: status pending/approved en membresías | ✅ Aplicada |
+| `20260707_fam_assigned_and_custom_type.sql` | fam_item.assigned_to + fam_list.custom_type | ✅ Aplicada |
 
 ### Recrear el proyecto desde cero
 
