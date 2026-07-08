@@ -129,6 +129,7 @@ Primer módulo de dominio sobre el core. **El aislamiento aquí es por membresí
 | `20260707_fam_member_approval.sql` | Aprobación de miembros: status pending/approved en membresías | ✅ Aplicada |
 | `20260707_fam_assigned_and_custom_type.sql` | fam_item.assigned_to + fam_list.custom_type | ✅ Aplicada |
 | `20260707_fam_visibility_and_not_found.sql` | Fix visibilidad (RETURNING + platform admin) y fam_item.not_found | ✅ Aplicada |
+| `20260708_fam_external_lists.sql` | Tipo externa + external_url (carritos de tiendas) | ✅ Aplicada |
 
 ### Recrear el proyecto desde cero
 
